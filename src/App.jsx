@@ -18,7 +18,7 @@ import Planner from "./pages/Planner";
 import Interview from "./pages/Interview";
 import About from "./pages/About";
 import Aptitude from "./pages/Aptitude";
-import TopicLearning from "./pages/Topiclearning";
+import TopicLearning from "./pages/TopicLearning";
 import ConceptCheck from "./pages/ConceptCheck";
 
 import SkillArena from "./pages/SkillArena";
