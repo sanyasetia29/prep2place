@@ -1,0 +1,183 @@
+
+.business-tools-page {
+  min-height: 100vh;
+  padding: 40px 7% 70px;
+  background: #fff7fa;
+  color: #49343b;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.tools-back-link {
+  display: inline-block;
+  margin-bottom: 25px;
+  color: #a63d68;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.business-tools-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+
+.business-tools-header span {
+  color: #b64d79;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.business-tools-header h1 {
+  margin: 12px 0;
+  font-size: 38px;
+  color: #71364f;
+}
+
+.business-tools-header p {
+  color: #806b74;
+  line-height: 1.7;
+}
+
+.business-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.business-tool-card {
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #f1dce5;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(113, 54, 79, 0.06);
+}
+
+.business-tool-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+
+.business-tool-card h2 {
+  color: #71364f;
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+.business-tool-card p {
+  color: #806b74;
+  line-height: 1.7;
+  min-height: 50px;
+}
+
+.business-tool-button {
+  margin-top: 12px;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 9px;
+  background: #b64d79;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.business-tool-button:hover {
+  background: #91385f;
+}
+
+.business-tool-panel {
+  max-width: 900px;
+  margin: 32px auto 0;
+  padding: 28px;
+  background: white;
+  border: 1px solid #f1dce5;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(113, 54, 79, 0.06);
+}
+
+.business-tool-panel h2 {
+  margin-top: 0;
+  color: #71364f;
+}
+
+.business-tool-panel label {
+  display: block;
+  margin: 18px 0 8px;
+  color: #654450;
+  font-weight: 600;
+}
+
+.business-tool-panel input,
+.business-tool-panel textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #e8cbd8;
+  border-radius: 9px;
+  background: #fffafd;
+  color: #49343b;
+  font: inherit;
+}
+
+.business-tool-panel textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+.tool-result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fff0f6;
+  color: #873d5e;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.swot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.swot-grid > div {
+  padding: 18px;
+  border-radius: 12px;
+  background: #fff4f8;
+}
+
+.swot-grid h3 {
+  margin-top: 0;
+  color: #a63d68;
+}
+
+.swot-grid p {
+  margin-bottom: 0;
+  color: #806b74;
+  line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+  .business-tools-page {
+    padding: 28px 5% 50px;
+  }
+
+  .business-tools-header h1 {
+    font-size: 30px;
+  }
+
+  .business-tools-grid,
+  .swot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .business-tool-card,
+  .business-tool-panel {
+    padding: 21px;
+  }
+}

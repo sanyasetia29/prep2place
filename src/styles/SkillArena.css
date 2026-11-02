@@ -1,0 +1,531 @@
+
+/* =========================================
+   SKILL ARENA - MAIN PAGE
+========================================= */
+
+.skill-arena {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  padding: 52px 5% 45px;
+  box-sizing: border-box;
+  background: #faf8fc;
+  color: #302846;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.skill-arena *,
+.skill-arena *::before,
+.skill-arena *::after {
+  box-sizing: border-box;
+}
+
+.arena-wrapper {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   PAGE HEADING
+========================================= */
+
+.arena-heading {
+  max-width: 790px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.arena-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 17px;
+  margin-bottom: 19px;
+  border: 1px solid #e9dff1;
+  border-radius: 30px;
+  background: #f3edf8;
+  color: #795b91;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.5px;
+}
+
+.tag-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a17abb;
+}
+
+.arena-heading h1 {
+  margin: 0 0 16px;
+  color: #382b53;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(36px, 5vw, 49px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.arena-heading > p {
+  max-width: 690px;
+  margin: 0 auto;
+  color: #777083;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.arena-heading-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 23px;
+}
+
+.arena-heading-line span:not(.heading-star) {
+  width: 48px;
+  height: 1px;
+  background: #e4d8ec;
+}
+
+.heading-star {
+  color: #a17abb;
+  font-size: 16px;
+}
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.arena-section {
+  width: 100%;
+}
+
+.arena-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 23px;
+}
+
+.section-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #9678a9;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1.8px;
+}
+
+.arena-section-heading h2 {
+  margin: 0;
+  color: #382b53;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.activity-count {
+  padding: 8px 13px;
+  border: 1px solid #e9e2ef;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #81758d;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* =========================================
+   ACTIVITY GRID
+========================================= */
+
+.arena-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  width: 100%;
+}
+
+/* =========================================
+   ACTIVITY CARDS
+========================================= */
+
+.arena-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 310px;
+  padding: 29px 31px;
+  overflow: hidden;
+  border: 1px solid #ece6f0;
+  border-radius: 17px;
+  background: #ffffff;
+  box-shadow: 0 5px 22px rgba(65, 48, 87, 0.045);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.arena-card::after {
+  position: absolute;
+  top: -55px;
+  right: -55px;
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  content: "";
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.arena-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(65, 48, 87, 0.10);
+}
+
+.arena-card.pink {
+  background: linear-gradient(145deg, #ffffff 60%, #fff1f5 100%);
+  border-color: #f0dfe7;
+}
+
+.arena-card.pink::after {
+  background: #f8dce7;
+}
+
+.arena-card.purple {
+  background: linear-gradient(145deg, #ffffff 60%, #f4efff 100%);
+  border-color: #e8e0f5;
+}
+
+.arena-card.purple::after {
+  background: #e6dcfa;
+}
+
+.arena-card.yellow {
+  background: linear-gradient(145deg, #ffffff 60%, #fff8e9 100%);
+  border-color: #f0e8d8;
+}
+
+.arena-card.yellow::after {
+  background: #f8ebca;
+}
+
+.arena-card.green {
+  background: linear-gradient(145deg, #ffffff 60%, #eff8f1 100%);
+  border-color: #e0ede3;
+}
+
+.arena-card.green::after {
+  background: #d9efdf;
+}
+
+/* =========================================
+   CARD TOP
+========================================= */
+
+.arena-card-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 21px;
+}
+
+.arena-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 59px;
+  height: 59px;
+  flex-shrink: 0;
+  border: 1px solid rgba(120, 95, 140, 0.10);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 27px;
+  transition: transform 0.25s ease;
+}
+
+.arena-card:hover .arena-icon {
+  transform: scale(1.07) rotate(-3deg);
+}
+
+.arena-number {
+  color: #b2a7ba;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.arena-card-label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-bottom: 9px;
+  color: #9675a8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.arena-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 11px;
+  color: #463451;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.arena-card > p {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  margin: 0 0 23px;
+  color: #797182;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+/* =========================================
+   EXPLORE BUTTON
+========================================= */
+
+.arena-button {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 44px;
+  padding: 11px 17px;
+  border: 1px solid #775c91;
+  border-radius: 8px;
+  background: #775c91;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arena-button:hover {
+  transform: translateY(-2px);
+  border-color: #5d4377;
+  background: #5d4377;
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(93, 67, 119, 0.17);
+}
+
+.arena-arrow {
+  font-size: 17px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.arena-button:hover .arena-arrow {
+  transform: translateX(4px);
+}
+
+.arena-button:focus-visible {
+  outline: 3px solid #cbb9df;
+  outline-offset: 4px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.arena-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid #ebe5f0;
+}
+
+.footer-icon {
+  color: #a17abb;
+  font-size: 15px;
+}
+
+.arena-footer p {
+  margin: 0;
+  color: #898194;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 850px) {
+  .skill-arena {
+    padding: 40px 4% 35px;
+  }
+
+  .arena-heading {
+    margin-bottom: 38px;
+  }
+
+  .arena-grid {
+    gap: 17px;
+  }
+
+  .arena-card {
+    min-height: 320px;
+    padding: 25px;
+  }
+
+  .arena-card h3 {
+    font-size: 22px;
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 580px) {
+  .skill-arena {
+    padding: 30px 16px 35px;
+  }
+
+  .arena-heading {
+    margin-bottom: 32px;
+  }
+
+  .arena-tag {
+    padding: 8px 12px;
+    font-size: 9px;
+    letter-spacing: 1.1px;
+  }
+
+  .arena-heading h1 {
+    font-size: 33px;
+  }
+
+  .arena-heading > p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .arena-section-heading {
+    align-items: flex-start;
+    margin-bottom: 19px;
+  }
+
+  .arena-section-heading h2 {
+    font-size: 22px;
+  }
+
+  .activity-count {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+
+  .arena-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .arena-card {
+    min-height: 0;
+    padding: 24px;
+    border-radius: 15px;
+  }
+
+  .arena-card-top {
+    margin-bottom: 17px;
+  }
+
+  .arena-icon {
+    width: 53px;
+    height: 53px;
+    font-size: 25px;
+  }
+
+  .arena-number {
+    font-size: 23px;
+  }
+
+  .arena-card h3 {
+    font-size: 22px;
+  }
+
+  .arena-card > p {
+    margin-bottom: 19px;
+    font-size: 13px;
+  }
+
+  .arena-button {
+    width: 100%;
+    min-height: 45px;
+  }
+
+  .arena-footer {
+    margin-top: 28px;
+  }
+
+  .arena-footer p {
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+  .arena-heading h1 {
+    font-size: 29px;
+  }
+
+  .arena-section-heading h2 {
+    font-size: 19px;
+  }
+
+  .arena-card {
+    padding: 20px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-card,
+  .arena-icon,
+  .arena-button,
+  .arena-arrow {
+    transition: none;
+  }
+
+  .arena-card:hover,
+  .arena-button:hover {
+    transform: none;
+  }
+}

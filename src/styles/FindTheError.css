@@ -1,0 +1,506 @@
+
+.find-error-page {
+  min-height: 100vh;
+  padding: 40px 6%;
+  background: #fff8fa;
+  color: #49343b;
+  font-family: Arial, sans-serif;
+}
+
+.error-back-link {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #a64f72;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.error-back-link:hover {
+  color: #703b50;
+}
+
+.error-header {
+  max-width: 850px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.error-label,
+.error-eyebrow {
+  display: inline-block;
+  color: #a64f72;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.error-header h1 {
+  margin: 14px 0;
+  color: #703b50;
+  font-family: Georgia, serif;
+  font-size: clamp(34px, 5vw, 48px);
+}
+
+.error-header h1 span {
+  color: #d986a2;
+}
+
+.error-header p {
+  color: #806b73;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.error-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 28px;
+}
+
+.error-stats > div {
+  padding: 20px 12px;
+  border: 1px solid #f0dce3;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.error-stats strong,
+.error-stats span {
+  display: block;
+}
+
+.error-stats strong {
+  margin-bottom: 7px;
+  color: #a64f72;
+  font-size: 25px;
+}
+
+.error-stats span {
+  color: #806b73;
+  font-size: 13px;
+}
+
+.error-practice {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #f0dce3;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 35px rgba(117, 61, 82, 0.07);
+}
+
+.error-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.error-section-heading h2 {
+  margin: 8px 0;
+  color: #703b50;
+  font-family: Georgia, serif;
+  font-size: 27px;
+}
+
+.error-score {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #fff0f5;
+  color: #a64f72;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.error-levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.error-level {
+  padding: 10px 18px;
+  border: 1px solid #ead6de;
+  border-radius: 25px;
+  background: #ffffff;
+  color: #805366;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.error-level:hover,
+.error-level.active {
+  border-color: #a64f72;
+  background: #a64f72;
+  color: #ffffff;
+}
+
+.error-progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: #806b73;
+  font-size: 13px;
+}
+
+.error-progress-track {
+  height: 8px;
+  margin-bottom: 26px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f5e8ed;
+}
+
+.error-progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #d986a2, #a64f72);
+  transition: width 0.3s ease;
+}
+
+.error-question-card {
+  padding: 22px;
+  border: 1px solid #f0dce3;
+  border-radius: 15px;
+  background: #fffafb;
+}
+
+.error-question-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-language {
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #f8e2e9;
+  color: #873d5b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.error-difficulty {
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.error-difficulty.easy {
+  background: #e7f5eb;
+  color: #287447;
+}
+
+.error-difficulty.medium {
+  background: #fff1d9;
+  color: #986313;
+}
+
+.error-difficulty.hard {
+  background: #fbe4e7;
+  color: #a43f52;
+}
+
+.error-question-card h3 {
+  margin: 18px 0 8px;
+  color: #593847;
+  font-family: Georgia, serif;
+  font-size: 23px;
+}
+
+.error-instruction {
+  color: #806b73;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.error-editor {
+  margin: 22px 0;
+  overflow: hidden;
+  border: 1px solid #ead6de;
+  border-radius: 12px;
+  background: #2d2630;
+}
+
+.error-editor-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid #51404c;
+  background: #40323d;
+  color: #f6dfe8;
+  font-size: 12px;
+}
+
+.error-editor-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.error-editor-dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d986a2;
+}
+
+.error-editor-dots i:nth-child(2) {
+  background: #e7bd7c;
+}
+
+.error-editor-dots i:nth-child(3) {
+  background: #9ac8a7;
+}
+
+.error-code {
+  margin: 0;
+  padding: 22px;
+  overflow-x: auto;
+  color: #ffeaf1;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 14px;
+  line-height: 1.9;
+  white-space: pre;
+}
+
+.error-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.error-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 14px;
+  border: 1px solid #ead6de;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #624653;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.error-option:hover:not(:disabled) {
+  border-color: #c77d98;
+  background: #fff1f5;
+}
+
+.error-option:disabled {
+  cursor: default;
+}
+
+.error-option-letter {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 8px;
+  background: #f8e7ed;
+  color: #a64f72;
+  font-weight: 700;
+}
+
+.error-option.option-selected {
+  border: 2px solid #a64f72;
+  background: #fff0f5;
+}
+
+.error-option.option-correct {
+  border-color: #75b58a;
+  background: #edf8f0;
+  color: #286b40;
+}
+
+.error-option.option-incorrect {
+  border-color: #dc8995;
+  background: #fff0f1;
+  color: #a43f52;
+}
+
+.error-option-mark {
+  margin-left: auto;
+  color: #287447;
+  font-weight: 700;
+}
+
+.error-feedback {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 12px;
+  line-height: 1.7;
+}
+
+.error-feedback.correct {
+  border: 1px solid #c9e8d1;
+  background: #eff9f1;
+  color: #286b40;
+}
+
+.error-feedback.incorrect {
+  border: 1px solid #f0d0d5;
+  background: #fff2f3;
+  color: #944252;
+}
+
+.error-feedback p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.error-primary-btn {
+  padding: 13px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #a64f72;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.error-primary-btn:hover:not(:disabled) {
+  background: #873d5b;
+  transform: translateY(-1px);
+}
+
+.error-primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-result {
+  padding: 35px 15px;
+  text-align: center;
+}
+
+.error-result-icon {
+  margin-bottom: 16px;
+  font-size: 50px;
+}
+
+.error-result h2 {
+  color: #703b50;
+  font-family: Georgia, serif;
+  font-size: 30px;
+}
+
+.error-result-message {
+  color: #806b73;
+  line-height: 1.7;
+}
+
+.error-result-score {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 25px auto;
+}
+
+.error-result-score strong {
+  color: #a64f72;
+  font-size: 38px;
+}
+
+.error-result-score span {
+  color: #806b73;
+  font-size: 14px;
+}
+
+.error-result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 450px;
+  margin: 0 auto 25px;
+}
+
+.error-result-grid > div {
+  padding: 20px;
+  border: 1px solid #f0dce3;
+  border-radius: 12px;
+  background: #fffafb;
+}
+
+.error-result-grid strong,
+.error-result-grid span {
+  display: block;
+}
+
+.error-result-grid strong {
+  margin-bottom: 8px;
+  color: #a64f72;
+  font-size: 24px;
+}
+
+.error-result-grid span {
+  color: #806b73;
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .find-error-page {
+    padding: 25px 14px 45px;
+  }
+
+  .error-practice {
+    padding: 20px 14px;
+  }
+
+  .error-stats {
+    gap: 8px;
+  }
+
+  .error-stats > div {
+    padding: 15px 7px;
+  }
+
+  .error-stats strong {
+    font-size: 21px;
+  }
+
+  .error-stats span {
+    font-size: 11px;
+  }
+
+  .error-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .error-options {
+    grid-template-columns: 1fr;
+  }
+
+  .error-question-card {
+    padding: 15px;
+  }
+
+  .error-code {
+    padding: 16px;
+    font-size: 12px;
+  }
+}

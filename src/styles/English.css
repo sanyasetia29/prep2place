@@ -1,0 +1,574 @@
+
+/* =========================================
+   PREP 2 PLACE - ENGLISH PAGE
+========================================= */
+
+.english-page {
+  width: 94%;
+  max-width: 1550px;
+  margin: 28px auto 55px;
+  color: #38283f;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.english-page *,
+.english-page *::before,
+.english-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.english-hero {
+  position: relative;
+  padding: 58px 60px;
+  overflow: hidden;
+  border: 1px solid #f0d9e8;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 95% 10%, rgba(222, 200, 255, 0.45), transparent 35%),
+    linear-gradient(120deg, #fff0f6 0%, #f6eaff 60%, #fff8ef 100%);
+}
+
+.english-hero::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  right: -85px;
+  bottom: -145px;
+  border: 35px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.english-label {
+  display: inline-block;
+  color: #984879;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.english-hero h1 {
+  max-width: 750px;
+  margin: 18px 0 15px;
+  color: #392543;
+  font-size: clamp(34px, 4vw, 49px);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -1.4px;
+}
+
+.english-hero > p {
+  max-width: 680px;
+  margin: 0;
+  color: #716276;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.english-hero-btn,
+.english-practice-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+  padding: 14px 24px;
+  border: 1px solid #873d76;
+  border-radius: 10px;
+  background: #873d76;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.english-hero-btn:hover,
+.english-practice-btn:hover {
+  background: #692b5d;
+  border-color: #692b5d;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(105, 43, 93, 0.18);
+}
+
+/* =========================================
+   INTRODUCTION
+========================================= */
+
+.english-intro {
+  max-width: 760px;
+  margin: 42px auto 40px;
+  text-align: center;
+}
+
+.english-intro h2,
+.english-categories > h2 {
+  margin: 0 0 12px;
+  color: #392543;
+  font-size: 29px;
+  line-height: 1.35;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.english-intro p,
+.english-section-subtitle {
+  margin: 0;
+  color: #766b7d;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+/* =========================================
+   CATEGORY SECTION
+========================================= */
+
+.english-categories {
+  margin-top: 38px;
+}
+
+.english-categories > h2,
+.english-section-subtitle {
+  text-align: center;
+}
+
+.english-section-subtitle {
+  margin-bottom: 28px;
+}
+
+.english-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 19px;
+}
+
+.english-category-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 245px;
+  padding: 25px 23px;
+  overflow: hidden;
+  border: 1px solid #eee2ed;
+  border-radius: 18px;
+  background: #fff;
+  color: #38283f;
+  font-family: inherit;
+  text-align: left;
+  box-shadow: 0 5px 20px rgba(65, 37, 72, 0.045);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease,
+    transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.english-category-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #873d76, #c58bb9, #e8c6e1);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.english-category-card:hover,
+.english-category-card.active {
+  border-color: #c98bb9;
+  background: #fff9fd;
+  box-shadow: 0 10px 27px rgba(135, 61, 118, 0.1);
+  transform: translateY(-4px);
+}
+
+.english-category-card:hover::before,
+.english-category-card.active::before {
+  opacity: 1;
+}
+
+.english-category-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 51px;
+  height: 51px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: #fceaf4;
+  font-size: 25px;
+}
+
+.english-category-card h3 {
+  margin: 18px 0 9px;
+  color: #392543;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 750;
+}
+
+.english-category-card p {
+  margin: 0 0 18px;
+  color: #766b7d;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.english-explore {
+  margin-top: auto;
+  color: #963f80;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+/* =========================================
+   TOPIC SECTION
+========================================= */
+
+.english-topic-section {
+  margin-top: 52px;
+}
+
+.english-topic-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.english-topic-heading h2 {
+  margin: 9px 0 0;
+  color: #392543;
+  font-size: 30px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.english-topic-count {
+  flex-shrink: 0;
+  padding: 9px 16px;
+  border: 1px solid #ecd9ef;
+  border-radius: 30px;
+  background: #f8effb;
+  color: #753b89;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+/* =========================================
+   TOPIC CARDS
+========================================= */
+
+.english-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.english-topic-card {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 108px;
+  gap: 18px;
+  padding: 21px 23px;
+  border: 1px solid #eee3ef;
+  border-radius: 16px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(65, 37, 72, 0.035);
+  transition: border-color 0.25s ease, background 0.25s ease,
+    transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.english-topic-card:hover {
+  border-color: #c98bb9;
+  background: #fff9fd;
+  color: inherit;
+  transform: translateY(-3px);
+  box-shadow: 0 9px 23px rgba(135, 61, 118, 0.09);
+}
+
+.english-topic-number {
+  display: flex;
+  flex-shrink: 0;
+  width: 47px;
+  height: 47px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #fceaf4;
+  color: #913c79;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.english-topic-card > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.english-topic-card h3 {
+  margin: 0 0 7px;
+  color: #392543;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 750;
+}
+
+.english-topic-card p {
+  margin: 0;
+  color: #766b7d;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.english-topic-arrow {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: #963f80;
+  font-size: 23px;
+  transition: transform 0.2s ease;
+}
+
+.english-topic-card:hover .english-topic-arrow {
+  transform: translateX(5px);
+}
+
+/* =========================================
+   PRACTICE BANNER
+========================================= */
+
+.english-practice-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: 38px;
+  padding: 30px 34px;
+  border: 1px solid #ead8ef;
+  border-radius: 18px;
+  background: linear-gradient(110deg, #fff4fa, #f6effc);
+}
+
+.english-practice-banner > div {
+  flex: 1;
+}
+
+.english-practice-banner h2 {
+  margin: 0 0 10px;
+  color: #392543;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.english-practice-banner p {
+  margin: 0;
+  color: #766b7d;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.english-practice-btn {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.english-category-card:focus-visible,
+.english-topic-card:focus-visible,
+.english-hero-btn:focus-visible,
+.english-practice-btn:focus-visible {
+  outline: 3px solid #c98bb9;
+  outline-offset: 4px;
+}
+
+/* =========================================
+   LARGE SCREENS
+========================================= */
+
+@media (min-width: 1500px) {
+  .english-page {
+    width: 92%;
+    max-width: 1600px;
+  }
+
+  .english-category-grid {
+    gap: 22px;
+  }
+
+  .english-category-card {
+    padding: 28px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+  .english-page {
+    width: 94%;
+  }
+
+  .english-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .english-category-card {
+    min-height: 220px;
+  }
+
+  .english-hero {
+    padding: 45px 38px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .english-page {
+    width: calc(100% - 28px);
+    margin: 18px auto 40px;
+  }
+
+  .english-hero {
+    padding: 32px 23px;
+    border-radius: 18px;
+  }
+
+  .english-label {
+    font-size: 10px;
+    letter-spacing: 1.3px;
+  }
+
+  .english-hero h1 {
+    margin: 15px 0 12px;
+    font-size: 30px;
+    letter-spacing: -0.7px;
+  }
+
+  .english-hero > p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .english-hero-btn,
+  .english-practice-btn {
+    padding: 12px 17px;
+    font-size: 12px;
+  }
+
+  .english-intro {
+    margin: 34px auto 30px;
+  }
+
+  .english-intro h2,
+  .english-categories > h2 {
+    font-size: 23px;
+  }
+
+  .english-intro p,
+  .english-section-subtitle {
+    font-size: 13px;
+  }
+
+  .english-categories {
+    margin-top: 30px;
+  }
+
+  .english-category-grid,
+  .english-topic-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .english-category-card {
+    min-height: 0;
+    padding: 21px;
+  }
+
+  .english-category-card h3 {
+    margin-top: 14px;
+  }
+
+  .english-category-card p {
+    margin-bottom: 16px;
+  }
+
+  .english-topic-section {
+    margin-top: 38px;
+  }
+
+  .english-topic-heading {
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+
+  .english-topic-heading h2 {
+    font-size: 25px;
+  }
+
+  .english-topic-count {
+    padding: 7px 11px;
+    font-size: 11px;
+  }
+
+  .english-topic-card {
+    min-height: 95px;
+    gap: 12px;
+    padding: 16px 13px;
+  }
+
+  .english-topic-number {
+    width: 39px;
+    height: 39px;
+    font-size: 12px;
+  }
+
+  .english-topic-card h3 {
+    font-size: 14px;
+  }
+
+  .english-topic-card p {
+    font-size: 11px;
+  }
+
+  .english-topic-arrow {
+    font-size: 20px;
+  }
+
+  .english-practice-banner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 28px;
+    padding: 23px;
+  }
+
+  .english-practice-banner h2 {
+    font-size: 19px;
+  }
+
+  .english-practice-btn {
+    margin-top: 15px;
+  }
+}

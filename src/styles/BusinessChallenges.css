@@ -1,0 +1,241 @@
+
+.business-challenges-page {
+  min-height: 100vh;
+  padding: 40px 7% 70px;
+  background: #fff7fa;
+  color: #49343b;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.challenge-back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #a63d68;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.business-challenges-header {
+  max-width: 720px;
+  margin: 0 auto 35px;
+  text-align: center;
+}
+
+.business-challenges-header > span,
+.challenge-tag {
+  color: #b64d79;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.business-challenges-header h1 {
+  margin: 12px 0;
+  color: #71364f;
+  font-size: 38px;
+}
+
+.business-challenges-header p {
+  color: #806b74;
+  line-height: 1.7;
+}
+
+.challenge-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #f1dce5;
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(113, 54, 79, 0.07);
+}
+
+.challenge-progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #a63d68;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.challenge-progress-track {
+  height: 7px;
+  margin: 15px 0 25px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f5e4ec;
+}
+
+.challenge-progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: #c65b87;
+  transition: width 0.3s ease;
+}
+
+.challenge-main-icon {
+  margin: 10px 0;
+  font-size: 42px;
+  text-align: center;
+}
+
+.challenge-card > h2 {
+  margin: 10px 0;
+  color: #71364f;
+  font-size: 27px;
+  text-align: center;
+}
+
+.challenge-situation {
+  padding: 18px;
+  border-radius: 12px;
+  background: #fff4f8;
+  color: #705964;
+  line-height: 1.8;
+}
+
+.challenge-card > h3 {
+  margin-top: 25px;
+  color: #654450;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.challenge-options {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 22px;
+}
+
+.challenge-option {
+  width: 100%;
+  padding: 15px 17px;
+  border: 1px solid #ead2de;
+  border-radius: 11px;
+  background: #fffafd;
+  color: #654450;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.challenge-option:hover:not(:disabled) {
+  border-color: #c65b87;
+  background: #fff1f7;
+}
+
+.challenge-option.chosen {
+  border: 2px solid #b64d79;
+  background: #fff0f6;
+}
+
+.challenge-option:disabled {
+  cursor: default;
+}
+
+.challenge-option.right-answer {
+  border-color: #4b9b70;
+  background: #eefaf2;
+  color: #256541;
+}
+
+.challenge-primary-button {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #b64d79;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.challenge-primary-button:hover:not(:disabled) {
+  background: #91385f;
+}
+
+.challenge-primary-button:disabled {
+  background: #d8a8bd;
+  cursor: not-allowed;
+}
+
+.challenge-feedback {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 12px;
+  line-height: 1.7;
+}
+
+.challenge-feedback h3 {
+  margin-top: 0;
+}
+
+.feedback-correct {
+  border: 1px solid #b8e0c6;
+  background: #f0fbf3;
+  color: #256541;
+}
+
+.feedback-wrong {
+  border: 1px solid #f0c9d4;
+  background: #fff3f6;
+  color: #873d5e;
+}
+
+.challenge-completion {
+  margin-top: 55px;
+  text-align: center;
+}
+
+.challenge-completion h1 {
+  margin: 12px 0;
+  color: #71364f;
+  font-size: 34px;
+}
+
+.challenge-completion p {
+  color: #806b74;
+  line-height: 1.7;
+}
+
+.challenge-score {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 25px auto;
+  padding: 20px;
+  border-radius: 14px;
+  background: #fff0f6;
+  color: #873d5e;
+}
+
+.challenge-score strong {
+  font-size: 32px;
+}
+
+@media (max-width: 600px) {
+  .business-challenges-page {
+    padding: 28px 5% 50px;
+  }
+
+  .business-challenges-header h1 {
+    font-size: 30px;
+  }
+
+  
+  .challenge-card {
+    padding: 21px;
+  }
+
+  .challenge-option {
+    font-size: 14px;
+  }
+}

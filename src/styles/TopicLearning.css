@@ -1,0 +1,338 @@
+/* ==============================
+   TOPIC LEARNING PAGE
+============================== */
+
+.learning-page {
+  min-height: 100vh;
+  padding: 30px 6%;
+  background: #faf9fd;
+  color: #302b3d;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ==============================
+   HEADER
+============================== */
+
+.learning-header {
+  max-width: 1000px;
+  margin: 0 auto 28px;
+  padding: 32px 35px;
+  text-align: center;
+  background: linear-gradient(135deg, #f0eafa, #fff0f5);
+  border: 1px solid #eee3f7;
+  border-radius: 20px;
+}
+
+.learning-header > p:first-child {
+  margin: 0 0 12px;
+  color: #805bb5;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.learning-header h1 {
+  margin: 0 0 14px;
+  color: #3d3152;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.learning-header > p:last-child {
+  max-width: 760px;
+  margin: 0 auto;
+  color: #62596e;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* ==============================
+   MAIN CONTENT
+============================== */
+
+.learning-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ==============================
+   CONCEPT CARDS
+============================== */
+
+.learning-card {
+  margin-bottom: 20px;
+  padding: 25px 28px;
+  background: #ffffff;
+  border: 1px solid #eee7f4;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(74, 49, 103, 0.045);
+}
+
+.learning-card h2 {
+  margin: 0 0 14px;
+  color: #684692;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.learning-card > p {
+  margin: 0 0 16px;
+  color: #50495b;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* ==============================
+   FORMULA BOX
+============================== */
+
+.formula-box {
+  margin: 16px 0;
+  padding: 15px 20px;
+  background: #f4effb;
+  border-left: 4px solid #9974c7;
+  border-radius: 9px;
+}
+
+.formula-box p {
+  margin: 7px 0;
+  color: #4d356c;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+/* ==============================
+   SOLVED EXAMPLES
+============================== */
+
+.example-box {
+  margin-top: 16px;
+  padding: 18px 20px;
+  background: #fff8fb;
+  border: 1px solid #f4dce8;
+  border-radius: 12px;
+}
+
+.example-box strong {
+  display: inline-block;
+  margin-bottom: 9px;
+  color: #a34e7a;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.example-box p {
+  margin: 0 0 12px;
+  color: #393142;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.example-box ol {
+  margin: 0;
+  padding-left: 23px;
+}
+
+.example-box li {
+  padding: 4px 0 4px 3px;
+  color: #5d5366;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* ==============================
+   NOTES AND REVISION
+============================== */
+
+.learning-card ul {
+  margin: 12px 0 0;
+  padding-left: 23px;
+}
+
+.learning-card ul li {
+  margin-bottom: 9px;
+  padding-left: 4px;
+  color: #51495c;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.learning-card ul li::marker {
+  color: #9974c7;
+}
+
+/* Quick Revision card */
+
+.learning-card:last-of-type {
+  background: #fdfbff;
+}
+
+/* ==============================
+   FOOTER / CONCEPT CHECK
+============================== */
+
+.learning-footer {
+  margin: 25px 0 10px;
+  padding: 30px 24px;
+  text-align: center;
+  background: linear-gradient(135deg, #eee6fa, #fff0f6);
+  border: 1px solid #e9dcf5;
+  border-radius: 18px;
+}
+
+.learning-footer h2 {
+  margin: 0 0 10px;
+  color: #45345c;
+  font-size: 25px;
+  line-height: 1.4;
+}
+
+.learning-footer p {
+  margin: 0 0 20px;
+  color: #62566e;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.learning-footer a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.learning-footer button {
+  padding: 13px 25px;
+  color: #ffffff;
+  background: #805bb5;
+  border: none;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.learning-footer button:hover {
+  background: #684692;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(104, 70, 146, 0.2);
+}
+
+/* ==============================
+   CONCEPTS COMING SOON
+============================== */
+
+.learning-page > h1 {
+  margin-top: 70px;
+  color: #684692;
+  text-align: center;
+  font-size: 32px;
+}
+
+.learning-page > p {
+  color: #62596e;
+  text-align: center;
+  font-size: 16px;
+}
+
+.learning-page > a {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  color: #805bb5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+@media (max-width: 768px) {
+  .learning-page {
+    padding: 22px 4%;
+  }
+
+  .learning-header {
+    margin-bottom: 20px;
+    padding: 27px 20px;
+    border-radius: 16px;
+  }
+
+  .learning-header h1 {
+    font-size: 34px;
+  }
+
+  .learning-header > p:last-child {
+    font-size: 15px;
+  }
+
+  .learning-card {
+    margin-bottom: 15px;
+    padding: 21px 19px;
+  }
+
+  .learning-card h2 {
+    font-size: 21px;
+  }
+
+  .learning-card > p {
+    font-size: 15px;
+  }
+
+  .formula-box,
+  .example-box {
+    padding: 15px;
+  }
+
+  .learning-footer {
+    padding: 25px 17px;
+  }
+
+  .learning-footer h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .learning-page {
+    padding: 16px 13px;
+  }
+
+  .learning-header {
+    padding: 24px 16px;
+  }
+
+  .learning-header > p:first-child {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .learning-header h1 {
+    font-size: 30px;
+  }
+
+  .learning-card {
+    padding: 18px 15px;
+  }
+
+  .learning-card h2 {
+    font-size: 19px;
+  }
+
+  .learning-card ul li,
+  .example-box li {
+    font-size: 14px;
+  }
+
+  .learning-footer button {
+    width: 100%;
+    padding: 13px 15px;
+  }
+}

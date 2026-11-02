@@ -1,0 +1,449 @@
+
+/* =========================================
+   PREP 2 PLACE - STUDY PLANNER
+   Premium Blue Theme
+========================================= */
+
+.planner-page {
+  min-height: 100vh;
+  padding: 55px 6%;
+  background: #f4f7fc;
+  color: #172554;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.planner-heading {
+  max-width: 850px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.planner-tag {
+  display: inline-block;
+  padding: 8px 17px;
+  margin-bottom: 16px;
+  border-radius: 30px;
+  background: #e0ecff;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.planner-heading h1 {
+  margin: 0;
+  color: #142b55;
+  font-size: clamp(32px, 4vw, 45px);
+  font-weight: 800;
+  letter-spacing: -1.3px;
+}
+
+.planner-heading p {
+  max-width: 620px;
+  margin: 14px auto 20px;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.planner-user {
+  display: inline-block;
+  margin: 5px;
+  padding: 9px 16px;
+  border: 1px solid #dbe6f5;
+  border-radius: 30px;
+  background: #ffffff;
+  color: #365477;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================
+   PLAN SELECTION CARDS
+========================================= */
+
+.planner-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 1120px;
+  margin: 0 auto 30px;
+}
+
+.planner-option {
+  position: relative;
+  min-height: 190px;
+  padding: 25px 23px;
+  overflow: hidden;
+  border: 1px solid #e0e9f5;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #172554;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.planner-option::after {
+  position: absolute;
+  right: -28px;
+  bottom: -42px;
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  background: #eff6ff;
+  content: "";
+  transition: transform 0.3s ease;
+}
+
+.planner-option:hover {
+  transform: translateY(-5px);
+  border-color: #93baf8;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.10);
+}
+
+.planner-option:hover::after {
+  transform: scale(1.25);
+}
+
+.planner-option.active {
+  border: 2px solid #2563eb;
+  background: linear-gradient(145deg, #ffffff, #eff6ff);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.12);
+}
+
+.planner-option-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 45px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 17px;
+  border-radius: 13px;
+  background: #e8f1ff;
+  color: #2563eb;
+  font-size: 21px;
+}
+
+.planner-option h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 8px;
+  color: #172554;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.planner-option p {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 15px;
+  color: #718096;
+  font-size: 13px;
+}
+
+.planner-option > span:last-child {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* =========================================
+   PROGRESS CARD
+========================================= */
+
+.planner-progress {
+  max-width: 1120px;
+  margin: 0 auto 30px;
+  padding: 28px 30px;
+  border: 1px solid #e1eaf5;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 5px 22px rgba(30, 64, 120, 0.045);
+}
+
+.planner-progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.planner-progress-info h2 {
+  margin: 0 0 7px;
+  color: #172554;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.planner-progress-info p {
+  margin: 0;
+  color: #718096;
+  font-size: 13px;
+}
+
+.planner-progress-info strong {
+  color: #2563eb;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.planner-progress-track {
+  width: 100%;
+  height: 11px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e8eef7;
+}
+
+.planner-progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  transition: width 0.4s ease;
+}
+
+/* =========================================
+   DAILY TARGETS SECTION
+========================================= */
+
+.planner-tasks {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #e1eaf5;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 5px 22px rgba(30, 64, 120, 0.045);
+}
+
+.planner-tasks-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.planner-tasks-heading h2 {
+  margin: 0;
+  color: #172554;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.planner-tasks-heading > span {
+  padding: 8px 15px;
+  border-radius: 30px;
+  background: #e8f1ff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.planner-tasks > p {
+  margin: 11px 0 24px;
+  color: #718096;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   TASK LIST
+========================================= */
+
+.planner-task-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.planner-task {
+  display: flex;
+  min-height: 68px;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 16px;
+  border: 1px solid #e5ebf4;
+  border-radius: 13px;
+  background: #f9fbff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.planner-task:hover {
+  transform: translateY(-2px);
+  border-color: #a8c8fa;
+  background: #f1f6ff;
+}
+
+.planner-task input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.planner-task-text {
+  flex: 1;
+  color: #334766;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.planner-task-status {
+  flex-shrink: 0;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+/* Completed task */
+
+.planner-task.completed {
+  border-color: #cce9da;
+  background: #f1faf5;
+}
+
+.planner-task.completed .planner-task-text {
+  color: #668273;
+  text-decoration: line-through;
+}
+
+.planner-task.completed .planner-task-status {
+  color: #16834b;
+}
+
+/* =========================================
+   FOCUS AND ACCESSIBILITY
+========================================= */
+
+.planner-option:focus-visible,
+.planner-task:focus-within {
+  outline: 3px solid rgba(37, 99, 235, 0.25);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+  .planner-page {
+    padding: 42px 5%;
+  }
+
+  .planner-options {
+    gap: 14px;
+  }
+
+  .planner-option {
+    padding: 20px 17px;
+  }
+
+  .planner-task-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .planner-page {
+    padding: 32px 16px;
+  }
+
+  .planner-heading {
+    margin-bottom: 30px;
+  }
+
+  .planner-heading h1 {
+    font-size: 31px;
+  }
+
+  .planner-heading p {
+    font-size: 13px;
+  }
+
+  .planner-options {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .planner-option {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .planner-option-icon {
+    margin-bottom: 11px;
+  }
+
+  .planner-progress,
+  .planner-tasks {
+    padding: 21px 17px;
+  }
+
+  .planner-progress-info h2 {
+    font-size: 17px;
+  }
+
+  .planner-progress-info strong {
+    font-size: 25px;
+  }
+
+  .planner-tasks-heading h2 {
+    font-size: 20px;
+  }
+
+  .planner-task {
+    padding: 13px 11px;
+  }
+
+  .planner-task-text {
+    font-size: 12px;
+  }
+
+  .planner-task-status {
+    font-size: 10px;
+  }
+}
+
+/* Wider layout for desktop screens */
+
+.planner-page {
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+.planner-options,
+.planner-progress,
+.planner-tasks {
+  max-width: 1320px;
+  width: 100%;
+}
+
+.planner-heading {
+  max-width: 1000px;
+}
+
+@media (min-width: 1500px) {
+  .planner-options,
+  .planner-progress,
+  .planner-tasks {
+    max-width: 1380px;
+  }
+}

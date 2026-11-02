@@ -1,0 +1,468 @@
+
+/* =========================================
+   PREP 2 PLACE - ELITE LOGIN & REGISTER
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+/* MAIN BACKGROUND */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  padding: 25px 9%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  background:
+    radial-gradient(ellipse at 18% 20%, rgba(48, 111, 255, 0.28), transparent 35%),
+    radial-gradient(ellipse at 85% 90%, rgba(108, 75, 235, 0.22), transparent 35%),
+    radial-gradient(circle at 13% 80%, rgba(48, 111, 255, 0.15), transparent 25%),
+    radial-gradient(circle at 70% 15%, rgba(97, 106, 255, 0.16), transparent 25%),
+    linear-gradient(125deg, #071329 0%, #0d2148 55%, #101c43 100%);
+}
+
+/* LEFT HEADING */
+
+.login-page::before {
+  content: "BUILD YOUR SKILLS.\A OWN YOUR FUTURE.";
+  white-space: pre-line;
+  position: absolute;
+  left: 9%;
+  top: 38%;
+  width: 43%;
+  color: #ffffff;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  text-shadow: 0 8px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* LEFT DESCRIPTION */
+
+.login-page::after {
+  content: "Learn smarter. Prepare better. Get placement-ready.";
+  position: absolute;
+  left: 9.2%;
+  top: 55%;
+  width: 38%;
+  color: #b7c9ed;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+/* =========================================
+   LOGIN CARD
+========================================= */
+
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 435px;
+  padding: 38px 39px;
+  margin: 0;
+
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35),
+    0 8px 30px rgba(43, 103, 222, 0.16);
+
+  animation: cardEnter 0.65s ease both;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* BRAND */
+
+.login-card::before {
+  content: "✦  PREP 2 PLACE";
+  display: block;
+  width: fit-content;
+  margin: 0 auto 20px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: #edf3ff;
+  color: #315fc2;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* HEADING */
+
+.login-card h1 {
+  margin: 0 0 8px;
+  color: #14274b;
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.8px;
+}
+
+/* DESCRIPTION */
+
+.login-card > p:not(.register-text):not(.login-error) {
+  color: #8490a5;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.login-card > p:not(.register-text):not(.login-error):not(.register-description) {
+  margin: 0 0 25px;
+}
+
+/* FORM */
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+/* FORM GROUPS */
+
+.login-card .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* LABELS */
+
+.login-card label {
+  color: #253959;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* INPUTS AND SELECT */
+
+.login-card input,
+.login-card select {
+  display: block;
+  width: 100%;
+  height: 49px;
+  padding: 0 15px;
+
+  border: 1px solid #e1e7f1;
+  border-radius: 10px;
+
+  background: #f7f9fd;
+  color: #172b4d;
+
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+
+  transition: all 0.25s ease;
+}
+
+.login-card input::placeholder {
+  color: #a6b0c1;
+}
+
+.login-card input:hover,
+.login-card select:hover {
+  border-color: #b9cafa;
+  background: #ffffff;
+}
+
+.login-card input:focus,
+.login-card select:focus {
+  border-color: #3977ed;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(57, 119, 237, 0.12);
+}
+
+/* COURSE DROPDOWN */
+
+.login-card select {
+  cursor: pointer;
+  appearance: none;
+  padding-right: 38px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234b6290' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+/* BUTTON */
+
+.login-card button {
+  display: block;
+  width: 100%;
+  min-height: 51px;
+  margin-top: 4px;
+  padding: 13px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(110deg, #2464d8, #5265ec);
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  box-shadow: 0 9px 22px rgba(57, 100, 218, 0.28);
+  transition: all 0.25s ease;
+}
+
+.login-card button:hover:not(:disabled) {
+  background: linear-gradient(110deg, #194fb9, #414fd4);
+  transform: translateY(-2px);
+  box-shadow: 0 13px 26px rgba(57, 100, 218, 0.35);
+}
+
+.login-card button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-card button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ERROR */
+
+.login-card .login-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 9px;
+  border: 1px solid #ffd2d2;
+  background: #fff2f2;
+  color: #c62828;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* REGISTER LINK */
+
+.login-card .register-text {
+  margin: 21px 0 0;
+  color: #8994a8;
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.login-card .register-text a {
+  color: #3267d3;
+  font-weight: 750;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-card .register-text a:hover {
+  color: #554cdb;
+  text-decoration: underline;
+}
+
+/* =========================================
+   COMPACT REGISTER CARD
+========================================= */
+
+.register-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 20px 32px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.register-card::before {
+  margin-bottom: 7px;
+  padding: 7px 15px;
+}
+
+.register-card h1 {
+  font-size: 27px;
+  margin: 0 0 1px;
+}
+
+.register-card .register-description {
+  margin: 0 0 5px;
+  color: #8490a5;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* REGISTER FORM SPACING */
+
+.register-card form {
+  gap: 9px;
+}
+
+.register-card .form-group {
+  gap: 4px;
+}
+
+.register-card label {
+  font-size: 12px;
+}
+
+/* REGISTER INPUTS */
+
+.register-card input,
+.register-card select {
+  height: 39px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+/* REGISTER BUTTON */
+
+.register-card button {
+  min-height: 43px;
+  margin-top: 3px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* REGISTER FOOTER */
+
+.register-card .register-text {
+  margin: 5px 0 0;
+  font-size: 12px;
+}
+
+/* =========================================
+   SHORT SCREEN SUPPORT
+========================================= */
+
+@media (min-width: 901px) and (max-height: 750px) {
+  .login-page {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .register-card {
+    padding-top: 13px;
+    padding-bottom: 13px;
+    gap: 5px;
+  }
+
+  .register-card::before {
+    margin-bottom: 4px;
+  }
+
+  .register-card h1 {
+    font-size: 24px;
+  }
+
+  .register-card form {
+    gap: 7px;
+  }
+
+  .register-card input,
+  .register-card select {
+    height: 36px;
+  }
+
+  .register-card button {
+    min-height: 40px;
+  }
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .login-page {
+    justify-content: center;
+    padding: 25px 20px;
+  }
+
+  .login-page::before,
+  .login-page::after {
+    display: none;
+  }
+
+  .register-card {
+    max-width: 440px;
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 15px 13px;
+  }
+
+  .login-card {
+    padding: 29px 21px;
+    border-radius: 19px;
+  }
+
+  .login-card h1 {
+    font-size: 26px;
+  }
+
+  .login-card input,
+  .login-card select {
+    height: 45px;
+  }
+
+  .login-card button {
+    min-height: 47px;
+  }
+
+  .register-card {
+    padding: 20px 19px;
+    gap: 6px;
+  }
+
+  .register-card h1 {
+    font-size: 24px;
+  }
+
+  .register-card form {
+    gap: 9px;
+  }
+
+  .register-card input,
+  .register-card select {
+    height: 39px;
+  }
+
+  .register-card .register-text {
+    margin-top: 5px;
+  }
+}

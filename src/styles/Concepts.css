@@ -1,0 +1,163 @@
+
+/* CONCEPT CORNER PAGE */
+.concepts-page {
+  min-height: 100vh;
+  padding: 45px 6% 70px;
+  background: linear-gradient(180deg, #fff7f8 0%, #fffdfb 100%);
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+.concepts-header {
+  max-width: 760px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.concepts-header span {
+  display: inline-block;
+  color: #b45c78;
+  background: #fce7ed;
+  padding: 8px 17px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.concepts-header h1 {
+  margin: 0 0 14px;
+  color: #542c3b;
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 600;
+}
+
+.concepts-header p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #79656c;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* TECHNOLOGY CARDS GRID */
+.concepts-grid {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* INDIVIDUAL CARD */
+.concept-card {
+  min-width: 0;
+  min-height: 255px;
+  padding: 27px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid #f1dce3;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(117, 61, 80, 0.06);
+  box-sizing: border-box;
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.concept-card:hover {
+  transform: translateY(-6px);
+  border-color: #e7b7c7;
+  box-shadow: 0 12px 28px rgba(117, 61, 80, 0.12);
+}
+
+/* ICON */
+.concept-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff0f4;
+  border-radius: 16px;
+  font-size: 29px;
+  margin-bottom: 19px;
+}
+
+/* CARD TITLE */
+.concept-card h2 {
+  margin: 0 0 10px;
+  color: #542c3b;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+/* CARD DESCRIPTION */
+.concept-card p {
+  margin: 0 0 22px;
+  color: #786971;
+  font-size: 14px;
+  line-height: 1.7;
+  flex-grow: 1;
+}
+
+/* START LEARNING LINK */
+.concept-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: #b85e7b;
+  color: #ffffff;
+  border: 1px solid #b85e7b;
+  border-radius: 9px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.concept-button:hover {
+  background: #95445f;
+  border-color: #95445f;
+  transform: translateY(-2px);
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+  .concepts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 560px) {
+  .concepts-page {
+    padding: 32px 18px 45px;
+  }
+
+  .concepts-header {
+    margin-bottom: 30px;
+  }
+
+  .concepts-header p {
+    font-size: 14px;
+  }
+
+  .concepts-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .concept-card {
+    min-height: 225px;
+    padding: 23px;
+  }
+}
