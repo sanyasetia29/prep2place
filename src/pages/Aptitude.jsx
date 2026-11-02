@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import aptitudeData from "../data/aptitudeData.json";
 import "../styles/Aptitude.css";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
-const API_BASE = "http://localhost:5000/api";
+
 
 function Aptitude() {
   const { topic } = useParams();
