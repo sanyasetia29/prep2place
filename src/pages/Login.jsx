@@ -1,7 +1,9 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
+
+const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -25,7 +27,7 @@ function Login({ onLogin }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch(`${API_BASE}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,10 +64,14 @@ function Login({ onLogin }) {
         return;
       }
 
-      // Save the logged-in user's details for the Planner.
       localStorage.setItem(
         "prep2place-username",
         loggedInUser.username.toLowerCase()
+      );
+
+      localStorage.setItem(
+        "prep2place-user",
+        JSON.stringify(loggedInUser)
       );
 
       if (loggedInUser.role === "student") {
@@ -74,23 +80,19 @@ function Login({ onLogin }) {
         localStorage.removeItem("prep2place-course");
       }
 
-      // Notify other components that the logged-in user has changed.
       window.dispatchEvent(new Event("prep2place-user-changed"));
 
-      // Save authenticated user in App.jsx.
       onLogin(loggedInUser);
 
       const destination =
         loggedInUser.role === "admin" ? "/admin" : "/home";
 
-      console.log("Login role:", loggedInUser.role);
-      console.log("Login course:", loggedInUser.course);
-      console.log("Redirecting to:", destination);
-
       navigate(destination, { replace: true });
     } catch (err) {
       console.error("Login error:", err);
-      setError("Backend connection failed. Please check the server.");
+      setError(
+        "Unable to connect to the server. Please try again."
+      );
     } finally {
       setLoading(false);
     }

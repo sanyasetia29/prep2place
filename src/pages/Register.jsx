@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 function Register() {
   const [name, setName] = useState("");
@@ -56,11 +56,14 @@ function Register() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE}/send-registration-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: cleanEmail }),
-      });
+      const response = await fetch(
+        `${API_BASE}/send-registration-otp`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: cleanEmail }),
+        }
+      );
 
       const data = await response.json();
 
@@ -75,7 +78,7 @@ function Register() {
       setMessage("OTP sent successfully! Please check your email.");
     } catch (err) {
       console.error("Send OTP error:", err);
-      setError("Backend connection failed. Please check the server.");
+      setError("Unable to connect to the server. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -137,7 +140,7 @@ function Register() {
       navigate("/login");
     } catch (err) {
       console.error("Registration error:", err);
-      setError("Backend connection failed. Please check the server.");
+      setError("Unable to connect to the server. Please try again.");
     } finally {
       setLoading(false);
     }

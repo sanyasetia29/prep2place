@@ -1,8 +1,10 @@
-
 import { useEffect, useState } from "react";
 import "../styles/AdminPanel.css";
 
-const API_URL = "http://localhost:5000/api/admin";
+const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
+const API_URL = `${API_BASE}/admin`;
 
 function AdminPanel() {
   const [active, setActive] = useState("Dashboard");
@@ -32,12 +34,29 @@ function AdminPanel() {
   const [form, setForm] = useState(emptyForm);
 
   const courses = [
-    { name: "BCA", description: "Computer Applications", color: "blue" },
-    { name: "BBA", description: "Business Administration", color: "green" },
-    { name: "MBA", description: "Management Studies", color: "orange" },
-    { name: "MCA", description: "Computer Applications", color: "purple" },
+    {
+      name: "BCA",
+      description: "Computer Applications",
+      color: "blue",
+    },
+    {
+      name: "BBA",
+      description: "Business Administration",
+      color: "green",
+    },
+    {
+      name: "MBA",
+      description: "Management Studies",
+      color: "orange",
+    },
+    {
+      name: "MCA",
+      description: "Computer Applications",
+      color: "purple",
+    },
   ];
 
+  // Admin authentication headers
   const adminHeaders = () => ({
     "Content-Type": "application/json",
     "x-admin-username":
@@ -47,6 +66,7 @@ function AdminPanel() {
       "",
   });
 
+  // Common API request function
   const request = async (url, options = {}) => {
     const response = await fetch(url, {
       ...options,
@@ -60,7 +80,8 @@ function AdminPanel() {
 
     if (!response.ok || data.success === false) {
       throw new Error(
-        data.message || `Request failed with status ${response.status}.`
+        data.message ||
+          `Request failed with status ${response.status}.`
       );
     }
 
@@ -82,8 +103,7 @@ function AdminPanel() {
     }
   };
 
-  // Load questions: try the existing /questions route first.
-  // If unavailable, try /aptitude-questions.
+  // Load aptitude questions
   const loadQuestions = async () => {
     setQuestionsLoading(true);
     setError("");
@@ -94,10 +114,12 @@ function AdminPanel() {
       try {
         data = await request(`${API_URL}/questions`);
       } catch (firstError) {
+        const message = firstError.message.toLowerCase();
+
         if (
-          firstError.message.toLowerCase().includes("admin access") ||
-          firstError.message.toLowerCase().includes("unauthorized") ||
-          firstError.message.toLowerCase().includes("forbidden")
+          message.includes("admin access") ||
+          message.includes("unauthorized") ||
+          message.includes("forbidden")
         ) {
           throw firstError;
         }
@@ -121,8 +143,9 @@ function AdminPanel() {
     try {
       const data = await request(`${API_URL}/quiz-attempts`);
 
-      // Support either response format from the backend.
-      setQuizAttempts(data.quizAttempts || data.attempts || []);
+      setQuizAttempts(
+        data.quizAttempts || data.attempts || []
+      );
     } catch (err) {
       setError(err.message || "Unable to load quiz results.");
     } finally {
@@ -130,25 +153,33 @@ function AdminPanel() {
     }
   };
 
+  // Load dashboard data when AdminPanel opens
   useEffect(() => {
     loadStudents();
     loadQuestions();
     loadQuizAttempts();
   }, []);
 
+  // Handle form changes
   const handleFormChange = (event) => {
     const { name, value } = event.target;
-    setForm((previous) => ({ ...previous, [name]: value }));
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
   };
 
+  // Reset question form
   const resetForm = () => {
     setForm({ ...emptyForm });
     setEditingId(null);
   };
 
-  // Add or update question
+  // Add or update aptitude question
   const handleQuestionSubmit = async (event) => {
     event.preventDefault();
+
     setError("");
     setSuccess("");
 
@@ -163,12 +194,16 @@ function AdminPanel() {
     }
 
     if (options.length < 2) {
-      setError("Please enter at least two options, one per line.");
+      setError(
+        "Please enter at least two options, one per line."
+      );
       return;
     }
 
     if (!options.includes(form.answer.trim())) {
-      setError("Answer must exactly match one of the options.");
+      setError(
+        "Answer must exactly match one of the options."
+      );
       return;
     }
 
@@ -184,6 +219,7 @@ function AdminPanel() {
 
     try {
       const baseRoute = `${API_URL}/questions`;
+
       const url =
         editingId !== null
           ? `${baseRoute}/${editingId}`
@@ -194,14 +230,20 @@ function AdminPanel() {
         body: JSON.stringify(payload),
       });
 
-      setSuccess(data.message || "Question saved successfully.");
+      setSuccess(
+        data.message || "Question saved successfully."
+      );
+
       resetForm();
       await loadQuestions();
     } catch (err) {
-      setError(err.message || "Unable to save question.");
+      setError(
+        err.message || "Unable to save question."
+      );
     }
   };
 
+  // Edit question
   const handleEdit = (question) => {
     setEditingId(question.id ?? question._id);
 
@@ -217,11 +259,20 @@ function AdminPanel() {
 
     setError("");
     setSuccess("");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
+  // Delete question
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this question?")) {
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this question?"
+      )
+    ) {
       return;
     }
 
@@ -229,28 +280,41 @@ function AdminPanel() {
     setSuccess("");
 
     try {
-      const data = await request(`${API_URL}/questions/${id}`, {
-        method: "DELETE",
-      });
+      const data = await request(
+        `${API_URL}/questions/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
-      if (editingId === id) resetForm();
+      if (editingId === id) {
+        resetForm();
+      }
 
-      setSuccess(data.message || "Question deleted successfully.");
+      setSuccess(
+        data.message || "Question deleted successfully."
+      );
+
       await loadQuestions();
     } catch (err) {
-      setError(err.message || "Unable to delete question.");
+      setError(
+        err.message || "Unable to delete question."
+      );
     }
   };
 
+  // Calculate average accuracy
   const averageAccuracy = quizAttempts.length
     ? Math.round(
         quizAttempts.reduce(
-          (total, attempt) => total + Number(attempt.accuracy || 0),
+          (total, attempt) =>
+            total + Number(attempt.accuracy || 0),
           0
         ) / quizAttempts.length
       )
     : 0;
 
+  // Dashboard statistics
   const stats = [
     {
       title: "Total Students",
@@ -278,6 +342,7 @@ function AdminPanel() {
     },
   ];
 
+  // Sidebar menu
   const menu = [
     { name: "Dashboard", icon: "⌂" },
     { name: "Students", icon: "♙" },
@@ -286,38 +351,56 @@ function AdminPanel() {
     { name: "Quiz Results", icon: "▥" },
   ];
 
+  // Open sidebar section
   const openSection = (name) => {
     setActive(name);
     setError("");
     setSuccess("");
 
-    if (name === "Students") loadStudents();
-    if (name === "Aptitude Questions") loadQuestions();
-    if (name === "Quiz Results") loadQuizAttempts();
+    if (name === "Students") {
+      loadStudents();
+    }
+
+    if (name === "Aptitude Questions") {
+      loadQuestions();
+    }
+
+    if (name === "Quiz Results") {
+      loadQuizAttempts();
+    }
   };
 
   return (
     <div className="admin-layout">
+      {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="admin-brand">
           <div className="admin-brand-icon">P</div>
+
           <div>
             <h2>Prep 2 Place</h2>
             <p>ADMIN PANEL</p>
           </div>
         </div>
 
-        <p className="admin-menu-label">MAIN MENU</p>
+        <p className="admin-menu-label">
+          MAIN MENU
+        </p>
 
         <nav className="admin-menu">
           {menu.map((item) => (
             <button
               key={item.name}
               type="button"
-              className={active === item.name ? "active" : ""}
+              className={
+                active === item.name ? "active" : ""
+              }
               onClick={() => openSection(item.name)}
             >
-              <span className="admin-menu-icon">{item.icon}</span>
+              <span className="admin-menu-icon">
+                {item.icon}
+              </span>
+
               {item.name}
             </button>
           ))}
@@ -330,16 +413,25 @@ function AdminPanel() {
         </div>
       </aside>
 
+      {/* Main content */}
       <main className="admin-main">
+        {/* Header */}
         <header className="admin-header">
           <div>
-            <p className="admin-breadcrumb">Workspace / {active}</p>
+            <p className="admin-breadcrumb">
+              Workspace / {active}
+            </p>
+
             <h1>{active}</h1>
-            <p>Manage your placement preparation platform.</p>
+
+            <p>
+              Manage your placement preparation platform.
+            </p>
           </div>
 
           <div className="admin-profile">
             <div className="admin-avatar">A</div>
+
             <div>
               <strong>Administrator</strong>
               <p>Admin account</p>
@@ -347,32 +439,57 @@ function AdminPanel() {
           </div>
         </header>
 
+        {/* Error message */}
         {error && (
-          <p role="alert" style={{ color: "#b42318", marginBottom: 16 }}>
+          <p
+            role="alert"
+            style={{
+              color: "#b42318",
+              marginBottom: 16,
+            }}
+          >
             {error}
           </p>
         )}
 
+        {/* Success message */}
         {success && (
-          <p role="status" style={{ color: "#18794e", marginBottom: 16 }}>
+          <p
+            role="status"
+            style={{
+              color: "#18794e",
+              marginBottom: 16,
+            }}
+          >
             {success}
           </p>
         )}
 
+        {/* Dashboard */}
         {active === "Dashboard" && (
           <>
             <section className="admin-welcome">
               <div>
-                <span className="admin-eyebrow">ADMIN OVERVIEW</span>
-                <h2>Welcome to your dashboard!</h2>
+                <span className="admin-eyebrow">
+                  ADMIN OVERVIEW
+                </span>
+
+                <h2>
+                  Welcome to your dashboard!
+                </h2>
+
                 <p>
-                  Manage learning resources and placement preparation for
-                  BCA, BBA, MBA and MCA students.
+                  Manage learning resources and placement
+                  preparation for BCA, BBA, MBA and MCA students.
                 </p>
               </div>
-              <div className="admin-welcome-art">✦</div>
+
+              <div className="admin-welcome-art">
+                ✦
+              </div>
             </section>
 
+            {/* Platform statistics */}
             <section className="admin-section">
               <div className="admin-section-heading">
                 <div>
@@ -383,12 +500,20 @@ function AdminPanel() {
 
               <div className="admin-stats">
                 {stats.map((stat) => (
-                  <article className="admin-stat-card" key={stat.title}>
-                    <div className={`admin-stat-icon ${stat.color}`}>
+                  <article
+                    className="admin-stat-card"
+                    key={stat.title}
+                  >
+                    <div
+                      className={`admin-stat-icon ${stat.color}`}
+                    >
                       {stat.icon}
                     </div>
+
                     <p>{stat.title}</p>
+
                     <h3>{stat.value}</h3>
+
                     <span>
                       {stat.title === "Total Students"
                         ? "Registered students"
@@ -403,31 +528,47 @@ function AdminPanel() {
               </div>
             </section>
 
+            {/* Courses */}
             <section className="admin-section">
               <div className="admin-section-heading">
                 <div>
                   <h2>Manage Courses</h2>
-                  <p>Courses available on Prep 2 Place</p>
+                  <p>
+                    Courses available on Prep 2 Place
+                  </p>
                 </div>
-                <span className="admin-count">4 courses</span>
+
+                <span className="admin-count">
+                  4 courses
+                </span>
               </div>
 
               <div className="admin-course-grid">
                 {courses.map((course) => (
-                  <article className="admin-course-card" key={course.name}>
-                    <div className={`admin-course-icon ${course.color}`}>
+                  <article
+                    className="admin-course-card"
+                    key={course.name}
+                  >
+                    <div
+                      className={`admin-course-icon ${course.color}`}
+                    >
                       {course.name}
                     </div>
+
                     <div>
                       <h3>{course.name}</h3>
                       <p>{course.description}</p>
                     </div>
-                    <span className="admin-course-status">Listed</span>
+
+                    <span className="admin-course-status">
+                      Listed
+                    </span>
                   </article>
                 ))}
               </div>
             </section>
 
+            {/* Quick access */}
             <section className="admin-section admin-quick-section">
               <div className="admin-section-heading">
                 <div>
@@ -437,13 +578,25 @@ function AdminPanel() {
               </div>
 
               <div className="admin-quick-actions">
-                <button onClick={() => openSection("Students")}>
+                <button
+                  onClick={() => openSection("Students")}
+                >
                   ♙ <span>View Students</span> →
                 </button>
-                <button onClick={() => openSection("Aptitude Questions")}>
+
+                <button
+                  onClick={() =>
+                    openSection("Aptitude Questions")
+                  }
+                >
                   ✎ <span>Aptitude Questions</span> →
                 </button>
-                <button onClick={() => openSection("Quiz Results")}>
+
+                <button
+                  onClick={() =>
+                    openSection("Quiz Results")
+                  }
+                >
                   ▥ <span>View Quiz Results</span> →
                 </button>
               </div>
@@ -451,6 +604,7 @@ function AdminPanel() {
           </>
         )}
 
+        {/* Students section */}
         {active === "Students" && (
           <section className="admin-content-card">
             <div className="admin-section-heading">
@@ -458,86 +612,142 @@ function AdminPanel() {
                 <h2>Student Management</h2>
                 <p>Registered student accounts</p>
               </div>
-              <button onClick={loadStudents} disabled={studentsLoading}>
+
+              <button
+                onClick={loadStudents}
+                disabled={studentsLoading}
+              >
                 {studentsLoading ? "Loading..." : "Refresh"}
               </button>
             </div>
 
-            {studentsLoading && <p>Loading student records...</p>}
-
-            {!studentsLoading && students.length === 0 && !error && (
-              <p>No students registered yet.</p>
+            {studentsLoading && (
+              <p>Loading student records...</p>
             )}
 
-            {!studentsLoading && students.length > 0 && (
-              <div style={{ overflowX: "auto" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                  <thead>
-                    <tr>
-                      {["Name", "Username", "Email", "Course"].map(
-                        (heading) => (
+            {!studentsLoading &&
+              students.length === 0 &&
+              !error && (
+                <p>No students registered yet.</p>
+              )}
+
+            {!studentsLoading &&
+              students.length > 0 && (
+                <div style={{ overflowX: "auto" }}>
+                  <table
+                    style={{
+                      width: "100%",
+                      borderCollapse: "collapse",
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        {[
+                          "Name",
+                          "Username",
+                          "Email",
+                          "Course",
+                        ].map((heading) => (
                           <th
                             key={heading}
-                            style={{ textAlign: "left", padding: 12 }}
+                            style={{
+                              textAlign: "left",
+                              padding: 12,
+                            }}
                           >
                             {heading}
                           </th>
-                        )
-                      )}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {students.map((student) => (
-                      <tr key={student.username || student.id}>
-                        <td style={{ padding: 12 }}>{student.name}</td>
-                        <td style={{ padding: 12 }}>{student.username}</td>
-                        <td style={{ padding: 12 }}>{student.email}</td>
-                        <td style={{ padding: 12 }}>
-                          {student.course || "Not selected"}
-                        </td>
+                        ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                    </thead>
+
+                    <tbody>
+                      {students.map((student) => (
+                        <tr
+                          key={
+                            student.username || student.id
+                          }
+                        >
+                          <td style={{ padding: 12 }}>
+                            {student.name}
+                          </td>
+
+                          <td style={{ padding: 12 }}>
+                            {student.username}
+                          </td>
+
+                          <td style={{ padding: 12 }}>
+                            {student.email}
+                          </td>
+
+                          <td style={{ padding: 12 }}>
+                            {student.course || "Not selected"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
           </section>
         )}
 
+        {/* Courses section */}
         {active === "Courses" && (
           <section className="admin-content-card">
             <h2>Available Courses</h2>
-            <p>These are the four courses supported by this platform.</p>
+
+            <p>
+              These are the four courses supported by this platform.
+            </p>
 
             <div className="admin-course-grid">
               {courses.map((course) => (
-                <article className="admin-course-card" key={course.name}>
-                  <div className={`admin-course-icon ${course.color}`}>
+                <article
+                  className="admin-course-card"
+                  key={course.name}
+                >
+                  <div
+                    className={`admin-course-icon ${course.color}`}
+                  >
                     {course.name}
                   </div>
+
                   <div>
                     <h3>{course.name}</h3>
                     <p>{course.description}</p>
                   </div>
-                  <span className="admin-course-status">Listed</span>
+
+                  <span className="admin-course-status">
+                    Listed
+                  </span>
                 </article>
               ))}
             </div>
           </section>
         )}
 
+        {/* Aptitude Questions section */}
         {active === "Aptitude Questions" && (
           <section className="admin-content-card">
             <div className="admin-section-heading">
               <div>
                 <h2>Aptitude Question Management</h2>
-                <p>Add, edit, delete and manage aptitude MCQs.</p>
+
+                <p>
+                  Add, edit, delete and manage aptitude MCQs.
+                </p>
               </div>
-              <button onClick={loadQuestions} disabled={questionsLoading}>
+
+              <button
+                onClick={loadQuestions}
+                disabled={questionsLoading}
+              >
                 {questionsLoading ? "Loading..." : "Refresh"}
               </button>
             </div>
 
+            {/* Question form */}
             <form
               onSubmit={handleQuestionSubmit}
               style={{
@@ -547,10 +757,15 @@ function AdminPanel() {
                 maxWidth: 750,
               }}
             >
-              <h3>{editingId !== null ? "Edit Question" : "Add New Question"}</h3>
+              <h3>
+                {editingId !== null
+                  ? "Edit Question"
+                  : "Add New Question"}
+              </h3>
 
               <label>
                 Topic
+
                 <select
                   name="topic"
                   value={form.topic}
@@ -576,6 +791,7 @@ function AdminPanel() {
 
               <label>
                 Difficulty
+
                 <select
                   name="difficulty"
                   value={form.difficulty}
@@ -589,13 +805,19 @@ function AdminPanel() {
 
               <label>
                 Question type
-                <select name="type" value={form.type} onChange={handleFormChange}>
+
+                <select
+                  name="type"
+                  value={form.type}
+                  onChange={handleFormChange}
+                >
                   <option value="MCQ">MCQ</option>
                 </select>
               </label>
 
               <label>
                 Question
+
                 <textarea
                   name="question"
                   value={form.question}
@@ -608,6 +830,7 @@ function AdminPanel() {
 
               <label>
                 Options (enter one option per line)
+
                 <textarea
                   name="options"
                   value={form.options}
@@ -620,6 +843,7 @@ function AdminPanel() {
 
               <label>
                 Correct answer (must match one option)
+
                 <input
                   name="answer"
                   value={form.answer}
@@ -631,6 +855,7 @@ function AdminPanel() {
 
               <label>
                 Explanation
+
                 <textarea
                   name="explanation"
                   value={form.explanation}
@@ -641,12 +866,24 @@ function AdminPanel() {
                 />
               </label>
 
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  flexWrap: "wrap",
+                }}
+              >
                 <button type="submit">
-                  {editingId !== null ? "Update Question" : "Add Question"}
+                  {editingId !== null
+                    ? "Update Question"
+                    : "Add Question"}
                 </button>
+
                 {editingId !== null && (
-                  <button type="button" onClick={resetForm}>
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                  >
                     Cancel Edit
                   </button>
                 )}
@@ -659,13 +896,23 @@ function AdminPanel() {
               Saved Questions ({questions.length})
             </h3>
 
-            {questionsLoading && <p>Loading questions...</p>}
-
-            {!questionsLoading && questions.length === 0 && !error && (
-              <p>No aptitude questions added yet.</p>
+            {questionsLoading && (
+              <p>Loading questions...</p>
             )}
 
-            <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
+            {!questionsLoading &&
+              questions.length === 0 &&
+              !error && (
+                <p>No aptitude questions added yet.</p>
+              )}
+
+            <div
+              style={{
+                display: "grid",
+                gap: 16,
+                marginTop: 16,
+              }}
+            >
               {questions.map((question) => (
                 <article
                   key={question.id ?? question._id}
@@ -676,28 +923,55 @@ function AdminPanel() {
                   }}
                 >
                   <p>
-                    <strong>{question.topic}</strong> · {question.difficulty}
-                  </p>
-                  <h3>{question.question}</h3>
-                  <ol type="A">
-                    {(question.options || []).map((option, index) => (
-                      <li key={`${question.id ?? question._id}-${index}`}>
-                        {String(option)}
-                      </li>
-                    ))}
-                  </ol>
-                  <p>
-                    <strong>Answer:</strong> {String(question.answer ?? "")}
-                  </p>
-                  <p>
-                    <strong>Explanation:</strong> {question.explanation}
+                    <strong>{question.topic}</strong>
+                    {" · "}
+                    {question.difficulty}
                   </p>
 
-                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    <button onClick={() => handleEdit(question)}>Edit</button>
+                  <h3>{question.question}</h3>
+
+                  <ol type="A">
+                    {(question.options || []).map(
+                      (option, index) => (
+                        <li
+                          key={`${
+                            question.id ?? question._id
+                          }-${index}`}
+                        >
+                          {String(option)}
+                        </li>
+                      )
+                    )}
+                  </ol>
+
+                  <p>
+                    <strong>Answer:</strong>{" "}
+                    {String(question.answer ?? "")}
+                  </p>
+
+                  <p>
+                    <strong>Explanation:</strong>{" "}
+                    {question.explanation}
+                  </p>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 10,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <button
+                      onClick={() => handleEdit(question)}
+                    >
+                      Edit
+                    </button>
+
                     <button
                       onClick={() =>
-                        handleDelete(question.id ?? question._id)
+                        handleDelete(
+                          question.id ?? question._id
+                        )
                       }
                     >
                       Delete
@@ -709,135 +983,196 @@ function AdminPanel() {
           </section>
         )}
 
+        {/* Quiz Results section */}
         {active === "Quiz Results" && (
           <section className="admin-content-card">
             <div className="admin-section-heading">
               <div>
                 <h2>Quiz Results</h2>
-                <p>View student scores and aptitude quiz performance.</p>
+
+                <p>
+                  View student scores and aptitude quiz performance.
+                </p>
               </div>
+
               <button
                 onClick={loadQuizAttempts}
                 disabled={attemptsLoading}
               >
-                {attemptsLoading ? "Loading..." : "Refresh Results"}
+                {attemptsLoading
+                  ? "Loading..."
+                  : "Refresh Results"}
               </button>
             </div>
 
+            {/* Result statistics */}
             <div className="admin-stats">
               <article className="admin-stat-card">
-                <div className="admin-stat-icon purple">▥</div>
+                <div className="admin-stat-icon purple">
+                  ▥
+                </div>
+
                 <p>Total Attempts</p>
+
                 <h3>{quizAttempts.length}</h3>
+
                 <span>Recorded quiz submissions</span>
               </article>
+
               <article className="admin-stat-card">
-                <div className="admin-stat-icon green">%</div>
+                <div className="admin-stat-icon green">
+                  %
+                </div>
+
                 <p>Average Accuracy</p>
+
                 <h3>{averageAccuracy}%</h3>
+
                 <span>Across recorded attempts</span>
               </article>
             </div>
 
             {attemptsLoading && (
-              <p style={{ marginTop: 20 }}>Loading quiz results...</p>
-            )}
-
-            {!attemptsLoading && quizAttempts.length === 0 && !error && (
               <p style={{ marginTop: 20 }}>
-                No quiz attempts recorded yet. Complete a main aptitude quiz
-                as a registered student first.
+                Loading quiz results...
               </p>
             )}
 
-            {!attemptsLoading && quizAttempts.length > 0 && (
-              <div style={{ overflowX: "auto", marginTop: 24 }}>
-                <table
+            {!attemptsLoading &&
+              quizAttempts.length === 0 &&
+              !error && (
+                <p style={{ marginTop: 20 }}>
+                  No quiz attempts recorded yet. Complete a main
+                  aptitude quiz as a registered student first.
+                </p>
+              )}
+
+            {/* Results table */}
+            {!attemptsLoading &&
+              quizAttempts.length > 0 && (
+                <div
                   style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
-                    minWidth: 850,
+                    overflowX: "auto",
+                    marginTop: 24,
                   }}
                 >
-                  <thead>
-                    <tr>
-                      {[
-                        "Student Name",
-                        "Email",
-                        "Topic",
-                        "Score",
-                        "Accuracy",
-                        "Attempt Date",
-                      ].map((heading) => (
-                        <th
-                          key={heading}
-                          style={{
-                            textAlign: "left",
-                            padding: 12,
-                            borderBottom: "1px solid #e5e7eb",
-                          }}
-                        >
-                          {heading}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {quizAttempts.map((attempt, index) => (
-                      <tr key={attempt.id ?? attempt._id ?? index}>
-                        <td style={{ padding: 12 }}>
-                          {attempt.studentName || "Student"}
-                        </td>
-                        <td style={{ padding: 12 }}>
-                          {attempt.studentEmail || "—"}
-                        </td>
-                        <td style={{ padding: 12 }}>{attempt.topic}</td>
-                        <td style={{ padding: 12, fontWeight: 600 }}>
-                          {attempt.score}/{attempt.totalQuestions}
-                        </td>
-                        <td style={{ padding: 12 }}>
-                          <span
+                  <table
+                    style={{
+                      width: "100%",
+                      borderCollapse: "collapse",
+                      minWidth: 850,
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        {[
+                          "Student Name",
+                          "Email",
+                          "Topic",
+                          "Score",
+                          "Accuracy",
+                          "Attempt Date",
+                        ].map((heading) => (
+                          <th
+                            key={heading}
                             style={{
-                              display: "inline-block",
-                              padding: "5px 10px",
-                              borderRadius: 20,
-                              background:
-                                Number(attempt.accuracy) >= 80
-                                  ? "#dcfce7"
-                                  : Number(attempt.accuracy) >= 50
-                                  ? "#fef3c7"
-                                  : "#fee2e2",
-                              color:
-                                Number(attempt.accuracy) >= 80
-                                  ? "#166534"
-                                  : Number(attempt.accuracy) >= 50
-                                  ? "#92400e"
-                                  : "#991b1b",
-                              fontWeight: 600,
+                              textAlign: "left",
+                              padding: 12,
+                              borderBottom:
+                                "1px solid #e5e7eb",
                             }}
                           >
-                            {attempt.accuracy ??
-                              (attempt.totalQuestions
-                                ? Math.round(
-                                    (Number(attempt.score || 0) /
-                                      Number(attempt.totalQuestions)) *
-                                      100
-                                  )
-                                : 0)}
-                            %
-                          </span>
-                        </td>
-                        <td style={{ padding: 12 }}>
-                          {attempt.attemptedAt
-                            ? new Date(attempt.attemptedAt).toLocaleString()
-                            : "Not available"}
-                        </td>
+                            {heading}
+                          </th>
+                        ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                    </thead>
+
+                    <tbody>
+                      {quizAttempts.map(
+                        (attempt, index) => {
+                          const accuracy =
+                            attempt.accuracy ??
+                            (attempt.totalQuestions
+                              ? Math.round(
+                                  (Number(attempt.score || 0) /
+                                    Number(
+                                      attempt.totalQuestions
+                                    )) *
+                                    100
+                                )
+                              : 0);
+
+                          return (
+                            <tr
+                              key={
+                                attempt.id ??
+                                attempt._id ??
+                                index
+                              }
+                            >
+                              <td style={{ padding: 12 }}>
+                                {attempt.studentName || "Student"}
+                              </td>
+
+                              <td style={{ padding: 12 }}>
+                                {attempt.studentEmail || "—"}
+                              </td>
+
+                              <td style={{ padding: 12 }}>
+                                {attempt.topic}
+                              </td>
+
+                              <td
+                                style={{
+                                  padding: 12,
+                                  fontWeight: 600,
+                                }}
+                              >
+                                {attempt.score}/
+                                {attempt.totalQuestions}
+                              </td>
+
+                              <td style={{ padding: 12 }}>
+                                <span
+                                  style={{
+                                    display: "inline-block",
+                                    padding: "5px 10px",
+                                    borderRadius: 20,
+                                    background:
+                                      Number(accuracy) >= 80
+                                        ? "#dcfce7"
+                                        : Number(accuracy) >= 50
+                                        ? "#fef3c7"
+                                        : "#fee2e2",
+                                    color:
+                                      Number(accuracy) >= 80
+                                        ? "#166534"
+                                        : Number(accuracy) >= 50
+                                        ? "#92400e"
+                                        : "#991b1b",
+                                    fontWeight: 600,
+                                  }}
+                                >
+                                  {accuracy}%
+                                </span>
+                              </td>
+
+                              <td style={{ padding: 12 }}>
+                                {attempt.attemptedAt
+                                  ? new Date(
+                                      attempt.attemptedAt
+                                    ).toLocaleString()
+                                  : "Not available"}
+                              </td>
+                            </tr>
+                          );
+                        }
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
           </section>
         )}
       </main>

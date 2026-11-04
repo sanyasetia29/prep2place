@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   BrowserRouter,
@@ -6,6 +5,7 @@ import {
   Route,
   Navigate,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -46,10 +46,18 @@ import EnglishTopic from "./pages/EnglishTopic";
 function AppContent() {
   const [selectedCourse, setSelectedCourse] = useState("");
 
-  // Session remains active during refresh.
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Restore login session after refresh.
   const [auth, setAuth] = useState(() => {
-    const savedUsername = sessionStorage.getItem("prep2place-username");
-    const savedRole = sessionStorage.getItem("prep2place-role");
+    const savedUsername = sessionStorage.getItem(
+      "prep2place-username"
+    );
+
+    const savedRole = sessionStorage.getItem(
+      "prep2place-role"
+    );
 
     if (
       savedUsername &&
@@ -63,7 +71,6 @@ function AppContent() {
       };
     }
 
-    // Clear old persistent login data.
     localStorage.removeItem("prep2place-username");
     localStorage.removeItem("prep2place-role");
 
@@ -75,30 +82,45 @@ function AppContent() {
   });
 
   const { username, role, isLoggedIn } = auth;
-  const location = useLocation();
 
   // Login Handler
   const handleLogin = (user) => {
     if (!user?.username || !user?.role) {
-      console.error("Login response must contain username and role.");
+      console.error(
+        "Login response must contain username and role."
+      );
       return;
     }
 
     const cleanUsername = user.username.trim();
-    const userRole = String(user.role).trim().toLowerCase();
+    const userRole = String(user.role)
+      .trim()
+      .toLowerCase();
 
     if (!["admin", "student"].includes(userRole)) {
       console.error("Invalid user role:", userRole);
       return;
     }
 
-    // Session storage controls login duration.
-    sessionStorage.setItem("prep2place-username", cleanUsername);
-    sessionStorage.setItem("prep2place-role", userRole);
+    sessionStorage.setItem(
+      "prep2place-username",
+      cleanUsername
+    );
 
-    // Keep existing project features compatible.
-    localStorage.setItem("prep2place-username", cleanUsername);
-    localStorage.setItem("prep2place-role", userRole);
+    sessionStorage.setItem(
+      "prep2place-role",
+      userRole
+    );
+
+    localStorage.setItem(
+      "prep2place-username",
+      cleanUsername
+    );
+
+    localStorage.setItem(
+      "prep2place-role",
+      userRole
+    );
 
     setAuth({
       username: cleanUsername,
@@ -114,6 +136,8 @@ function AppContent() {
 
     localStorage.removeItem("prep2place-username");
     localStorage.removeItem("prep2place-role");
+    localStorage.removeItem("prep2place-user");
+    localStorage.removeItem("prep2place-course");
 
     setAuth({
       username: "",
@@ -122,7 +146,9 @@ function AppContent() {
     });
 
     setSelectedCourse("");
-    window.location.href = "/login";
+
+    // React Router navigation without reloading the website.
+    navigate("/login", { replace: true });
   };
 
   // Student Protected Pages
@@ -173,12 +199,18 @@ function AppContent() {
   return (
     <>
       {isLoggedIn && !hideNavbar && (
-        <Navbar onLogout={handleLogout} role={role} />
+        <Navbar
+          onLogout={handleLogout}
+          role={role}
+        />
       )}
 
       <Routes>
         {/* Default Route */}
-        <Route path="/" element={homeRedirect()} />
+        <Route
+          path="/"
+          element={homeRedirect()}
+        />
 
         {/* Login */}
         <Route
@@ -195,14 +227,18 @@ function AppContent() {
         {/* Student Home */}
         <Route
           path="/home"
-          element={protectedPage(<Home username={username} />)}
+          element={protectedPage(
+            <Home username={username} />
+          )}
         />
 
         {/* Courses */}
         <Route
           path="/courses"
           element={protectedPage(
-            <Courses setSelectedCourse={setSelectedCourse} />
+            <Courses
+              setSelectedCourse={setSelectedCourse}
+            />
           )}
         />
 
@@ -222,185 +258,253 @@ function AppContent() {
         <Route
           path="/preparation"
           element={protectedPage(
-            <Preparation selectedCourse={selectedCourse} />
+            <Preparation
+              selectedCourse={selectedCourse}
+            />
           )}
         />
 
         {/* Planner */}
         <Route
           path="/planner"
-          element={protectedPage(<Planner />)}
+          element={protectedPage(
+            <Planner />
+          )}
         />
 
         {/* Interview */}
         <Route
           path="/interview"
-          element={protectedPage(<Interview />)}
+          element={protectedPage(
+            <Interview />
+          )}
         />
 
         {/* About */}
         <Route
           path="/about"
-          element={protectedPage(<About />)}
+          element={protectedPage(
+            <About />
+          )}
         />
 
         {/* Aptitude */}
         <Route
           path="/aptitude"
-          element={protectedPage(<Aptitude />)}
+          element={protectedPage(
+            <Aptitude />
+          )}
         />
 
         <Route
           path="/aptitude/:topic"
-          element={protectedPage(<Aptitude />)}
+          element={protectedPage(
+            <Aptitude />
+          )}
         />
 
         {/* Aptitude Learning */}
         <Route
           path="/learn/:topic"
-          element={protectedPage(<TopicLearning />)}
+          element={protectedPage(
+            <TopicLearning />
+          )}
         />
 
         <Route
           path="/concept-check/:topic"
-          element={protectedPage(<ConceptCheck />)}
+          element={protectedPage(
+            <ConceptCheck />
+          )}
         />
 
         {/* English */}
         <Route
           path="/english"
-          element={protectedPage(<English />)}
+          element={protectedPage(
+            <English />
+          )}
         />
 
         <Route
           path="/english/:topic"
-          element={protectedPage(<EnglishTopic />)}
+          element={protectedPage(
+            <EnglishTopic />
+          )}
         />
 
         {/* BCA Skill Arena */}
         <Route
           path="/skill-arena"
-          element={protectedPage(<SkillArena />)}
+          element={protectedPage(
+            <SkillArena />
+          )}
         />
 
         <Route
           path="/skill-arena/concepts"
-          element={protectedPage(<Concepts />)}
+          element={protectedPage(
+            <Concepts />
+          )}
         />
 
         <Route
           path="/skill-arena/concepts/:language/:index"
-          element={protectedPage(<ConceptLesson />)}
+          element={protectedPage(
+            <ConceptLesson />
+          )}
         />
 
         <Route
           path="/skill-arena/find-the-error"
-          element={protectedPage(<FindTheError />)}
+          element={protectedPage(
+            <FindTheError />
+          )}
         />
 
         <Route
           path="/skill-arena/daily-puzzle"
-          element={protectedPage(<DailyCodePuzzle />)}
+          element={protectedPage(
+            <DailyCodePuzzle />
+          )}
         />
 
         <Route
           path="/skill-arena/quiz"
-          element={protectedPage(<ProgrammingQuiz />)}
+          element={protectedPage(
+            <ProgrammingQuiz />
+          )}
         />
 
         {/* BBA Skill Arena */}
         <Route
           path="/bba-skill-arena"
-          element={protectedPage(<SkillArena />)}
+          element={protectedPage(
+            <SkillArena />
+          )}
         />
 
         <Route
           path="/bba-skill-arena/concepts"
-          element={protectedPage(<Concepts />)}
+          element={protectedPage(
+            <Concepts />
+          )}
         />
 
         <Route
           path="/bba-skill-arena/concepts/:topic"
-          element={protectedPage(<BBALesson />)}
+          element={protectedPage(
+            <BBALesson />
+          )}
         />
 
         <Route
           path="/bba-skill-arena/case-study"
-          element={protectedPage(<BusinessCaseStudy />)}
+          element={protectedPage(
+            <BusinessCaseStudy />
+          )}
         />
 
         <Route
           path="/bba-skill-arena/business-tools"
-          element={protectedPage(<BusinessTools />)}
+          element={protectedPage(
+            <BusinessTools />
+          )}
         />
 
         <Route
           path="/bba-skill-arena/challenges"
-          element={protectedPage(<BusinessChallenges />)}
+          element={protectedPage(
+            <BusinessChallenges />
+          )}
         />
 
         {/* MCA Skill Arena */}
         <Route
           path="/mca-skill-arena"
-          element={protectedPage(<SkillArena />)}
+          element={protectedPage(
+            <SkillArena />
+          )}
         />
 
         <Route
           path="/mca-skill-arena/advanced-coding"
-          element={protectedPage(<MCASkillPage type="coding" />)}
+          element={protectedPage(
+            <MCASkillPage type="coding" />
+          )}
         />
 
         <Route
           path="/mca-skill-arena/code-detective"
-          element={protectedPage(<MCASkillPage type="debugging" />)}
+          element={protectedPage(
+            <MCASkillPage type="debugging" />
+          )}
         />
 
         <Route
           path="/mca-skill-arena/sql-mission"
-          element={protectedPage(<MCASkillPage type="sql" />)}
+          element={protectedPage(
+            <MCASkillPage type="sql" />
+          )}
         />
 
         <Route
           path="/mca-skill-arena/technical-quiz"
-          element={protectedPage(<MCASkillPage type="quiz" />)}
+          element={protectedPage(
+            <MCASkillPage type="quiz" />
+          )}
         />
 
         {/* MBA Skill Arena */}
         <Route
           path="/mba-skill-arena"
-          element={protectedPage(<SkillArena />)}
+          element={protectedPage(
+            <SkillArena />
+          )}
         />
 
         <Route
           path="/mba-skill-arena/marketing"
-          element={protectedPage(<MBASkillPage type="marketing" />)}
+          element={protectedPage(
+            <MBASkillPage type="marketing" />
+          )}
         />
 
         <Route
           path="/mba-skill-arena/finance"
-          element={protectedPage(<MBASkillPage type="finance" />)}
+          element={protectedPage(
+            <MBASkillPage type="finance" />
+          )}
         />
 
         <Route
           path="/mba-skill-arena/leadership"
-          element={protectedPage(<MBASkillPage type="leadership" />)}
+          element={protectedPage(
+            <MBASkillPage type="leadership" />
+          )}
         />
 
         <Route
           path="/mba-skill-arena/business-strategy"
-          element={protectedPage(<MBASkillPage type="strategy" />)}
+          element={protectedPage(
+            <MBASkillPage type="strategy" />
+          )}
         />
 
         {/* Admin Panel */}
         <Route
           path="/admin"
-          element={adminPage(<AdminPanel />)}
+          element={adminPage(
+            <AdminPanel />
+          )}
         />
 
         {/* Optional Skill Arena URL */}
         <Route
           path="/skill-arena/:course"
-          element={protectedPage(<SkillArena />)}
+          element={protectedPage(
+            <SkillArena />
+          )}
         />
 
         {/* Unknown URLs */}
